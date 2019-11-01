@@ -85,7 +85,7 @@ def main():
     print(my_student.getAssignment("ENGS115", "Implement Browser History Using Stack"))
     
      #Adding grades
-    my_student.addGrade("ENGS115","Implement Browser History Using Stack","2019-10-31","90")
+    my_student.addGrade("ENGS115","Implement Browser History Using Stack","90")
     print(my_student.getAssignment("ENGS115", "Implement Browser History Using Stack"))
     
 main()
