@@ -89,8 +89,3 @@ def main():
     print(my_student.getAssignment("ENGS115", "Implement Browser History Using Stack"))
     
 main()
-
-
-
-main()
-
