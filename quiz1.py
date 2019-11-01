@@ -64,6 +64,12 @@ class Student:
         course = self.getCourse(cID)
         return course.getAssignment(title)
 
+    def addGrade(self, cID, title, grade):
+        course = self.getCourse(cID)
+        if course != None:
+            assignment = self.getAssignment(cID, title)
+            assignment.setGrade(grade)
+
 
 def main():
     my_student = Student("Artur", "Sargsyan", "AUA234")
