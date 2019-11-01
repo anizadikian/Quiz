@@ -1,71 +1,83 @@
-class Student:
+class Assignment:
 
-    def __init__(self, name=None, surname=None, ID=None):
-        self.name = name
-        self.surname = surname
-        self.ID = ID
-        self.courses = []
-        self.next = None
+    def __init__(self, title, deadline):
+        self.title = title
+        self.deadline = deadline
+        self.grade = 0
 
-    def addCourse(self):
-        newcourse = Course(assigment=, deadline=)
-        self.courses.append(newcourse)
+    def __str__(self):
+        return self.title + ": " + self.deadline + ": " + str(self.grade)
 
-    def addAssigment(self, coursename, assigment, deadline):
-        newassigment = Course(coursename, assigment, deadline)
-        self.assigments.append(newassigment)
-
+    def setGrade(self, grade):
+        self.grade = grade
 
 class Course:
+    def __init__(self, ID):
+        self.ID = ID
+        self.assignments = []
 
-    def __init__(self, coursename, assigment, deadline):
-        self.coursename = coursename
-        self.assigments = assigment
-        self.deadline = deadline
-        self.assigments = []
+    def __str__(self):
+        return self.ID
 
-    def addAssigment(self):
-        newassigment1 = Assigment(name=, deadline=, grade=)
-        self.assigments.append(newassigment1)
+    def addAssignment(self, title, deadline):
+        assignment = Assignment(title, deadline)
+        self.assignments.append(assignment)
 
-class Assigment:
+    def getAssignment(self, title):
+        for item in self.assignments:
+            if item.title == title:
+                return item
+        return None
 
-    def __init__(self, name, deadline, grade):
-        self.name = name
-        self.deadline = deadline
-        self.grade = grade
-        self.__head = None
+class Student:
 
-    def addGrade(self):
-        pass
+    def __init__(self, Fname, Lname, ID):
+        self.Fname = Fname
+        self.Lname = Lname
+        self.ID = ID
+        self.courses = []
 
-    #
-    # def setHead(self, coursename, assigment, deadline):
-    #     self.__head = Student(coursename, assigment, deadline)
-    #
-    # def display(self):
-    #     printval = self.__head
-    #     while printval is not None:
-    #         print(printval.name, printval.surname, printval.course)
-    #         printval = printval.next
+    def __str__(self):
+        return self.getFullName() + ": " + self.ID
 
-    # def append(self, name, grade):
-    #     temp = self.__head
-    #     while temp.next is not None:
-    #         temp = temp.next
-    #
-    #     student1 = Student(name, grade)
-    #     temp.next = student1
-    #
+    def getFullName(self):
+        return self.Fname + " " + self.Lname
 
+    def addCourse(self, ID):
+        course = Course(ID)
+        self.courses.append(course)
 
+    def addAssignment(self, cID, title, deadline):
+        course = self.getCourse(cID)
+        if course != None:
+            course.addAssignment(title, deadline)
+        else:
+            print("The course", cID, "does not exist for this student")
 
+    def getCourse(self, ID):
+        for item in self.courses:
+            if item.ID == ID:
+                return item
+        return None
 
-
-
-
-
-
+    def getAssignment(self, cID, title):
+        course = self.getCourse(cID)
+        return course.getAssignment(title)
 
 
+def main():
+    my_student = Student("Artur", "Sargsyan", "AUA234")
+    print(my_student)
+
+    #Adding Courses
+    my_student.addCourse("ENGS115")
+    print(my_student.getCourse("ENGS115"))
+    print(my_student.getCourse("ENGS105"))
+
+    #Adding assignment
+    my_student.addAssignment("ENGS115", "Implement Browser History Using Stack", "2019-10-31")
+    print(my_student.getAssignment("ENGS115", "Implement Browser History Using Stack"))
+
+
+main()
 
